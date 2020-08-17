@@ -1,0 +1,4 @@
+-- Doctrine Migration File Generated on 2020-08-16 02:30:52
+
+-- Version DoctrineMigrations\Version20200816003034
+CREATE TABLE blog_post (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, published DATETIME DEFAULT NULL, content LONGTEXT NOT NULL, author VARCHAR(255) NOT NULL, slug VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
