@@ -35,7 +35,7 @@ use App\Controller\ResetPasswordAction;
  *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
  *             "method"="PUT",
  *             "path"="/users/{id}/reset-password",
- *             "controller"=ResetPasswordAction::class,
+ *             "controller"=ResetPasswordAction::class, 
  *             "denormalization_context"={
  *                 "groups"={"put-reset-password"}
  *             },
@@ -89,7 +89,7 @@ class User implements UserInterface
      * @Groups({"post"})
      * @Assert\NotBlank(groups={"post"})
      * @Assert\Regex(
-     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
+     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{4,}/",
      *     message="Password must be seven characters long and contain at least one digit, one upper case letter and one lower case letter",
      *     groups={"post"}
      * )
@@ -183,6 +183,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=40, nullable=true)
+     * @Groups({"get"})
      */
     private $confirmationToken;
 

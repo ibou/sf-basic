@@ -22,10 +22,11 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  * @ApiFilter(
  *     SearchFilter::class,
  *     properties={
+ *         "id": "exact",
  *         "title": "partial",
  *         "content": "partial",
  *         "author": "exact",
- *         "author.name": "partial"
+ *         "author.name": "partial",
  *     }
  * )
  * @ApiFilter(
@@ -124,11 +125,22 @@ class BlogPost implements AuthoredEntityInterface, PublishedDateEntityInterface
      * @Groups({"get-blog-post-with-author"})
      */
     private $comments;
- 
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Image::class)
+     * @ORM\JoinTable()
+     * @ApiSubresource()
+     * @Groups({"post", "get-blog-post-with-author"})
+     */
+    private $images;
+
+
 
     public function __construct()
     {
-        $this->comments = new ArrayCollection(); 
+        $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getComments(): Collection
@@ -204,7 +216,34 @@ class BlogPost implements AuthoredEntityInterface, PublishedDateEntityInterface
 
         return $this;
     }
- 
+
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+        }
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->title;

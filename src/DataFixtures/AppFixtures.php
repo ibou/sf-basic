@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
         TokenGenerator $tokenGenerator
     ) {
         $this->passwordEncoder = $passwordEncoder;
-        $this->faker = \Faker\Factory::create();
+        $this->faker = \Faker\Factory::create('fr_FR');
         $this->tokenGenerator = $tokenGenerator;
     }
 
