@@ -10,14 +10,13 @@ easy_admin:
                     - id
                     - title
                     - published
-                    - { property: 'comments', template: 'admin/BlogPost/comments.html.twig'}
+                    - { property: 'comments', template: 'admin/BlogPost/comments.html.twig' }
                     - images
         Comment:
             class: App\Entity\Comment
         User:
             class: App\Entity\User
             controller: App\Controller\UserAdminController
-            password_encoding: { algorithm: 'bcrypt', cost: 12 }
         Image:
             class: App\Entity\Image
             list:
@@ -27,3 +26,4 @@ easy_admin:
             form:
                 fields:
                     - { property: 'file', type: 'Vich\UploaderBundle\Form\Type\VichFileType' }
+                    
