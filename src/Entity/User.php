@@ -80,7 +80,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"get", "post", "get-comment-with-author", "get-blog-post-with-author"})
      * @Assert\NotBlank(groups={"post"})
-     * @Assert\Length(min=6, max=255, groups={"post"})
+     * @Assert\Length(min=3, max=255, groups={"post"})
      */
     private $username;
 
@@ -111,7 +111,7 @@ class User implements UserInterface
      * @Groups({"put-reset-password"})
      * @Assert\NotBlank(groups={"put-reset-password"})
      * @Assert\Regex(
-     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{7,}/",
+     *     pattern="/(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{4,}/",
      *     message="Password must be seven characters long and contain at least one digit, one upper case letter and one lower case letter",
      *     groups={"put-reset-password"}
      * )
